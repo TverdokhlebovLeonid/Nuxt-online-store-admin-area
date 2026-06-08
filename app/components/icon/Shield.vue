@@ -1,0 +1,5 @@
+<template>
+  <UiIcon :stroke-width="1.8">
+    <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+  </UiIcon>
+</template>
