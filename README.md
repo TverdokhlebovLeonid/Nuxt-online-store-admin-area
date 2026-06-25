@@ -29,6 +29,31 @@ npm run dev
 On first run, migrations are applied automatically and seeding runs:
 a catalog and an administrator account are created.
 
+### Docker
+
+```bash
+cp .env.example .env
+# set NUXT_SESSION_PASSWORD and other variables in .env
+
+docker compose up --build
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000) (or at the port from `APP_PORT` in `.env`).
+
+Persistent data is stored in Docker volumes:
+
+- `app-data` — SQLite database (`.data/app.db`)
+- `app-uploads` — uploaded images (`public/uploads`)
+
+Set `NUXT_PUBLIC_SITE_URL` in `.env` to the public URL (e.g. `http://localhost:3000`).
+
+`ADMIN_EMAIL` and `ADMIN_PASSWORD` are used **only on first seed** (when the database is empty). If you change them later, reset volumes: `docker compose down -v`.
+
+```bash
+docker compose down       # stop containers
+docker compose down -v    # stop and remove volumes (deletes DB and uploads)
+```
+
 #### Environment Variables
 
 | Variable                        | Purpose                                                   |
@@ -77,6 +102,31 @@ npm run dev
 
 При первом запуске автоматически применяются миграции и выполняется сидинг:
 создаётся каталог и учётная запись администратора.
+
+### Docker
+
+```bash
+cp .env.example .env
+# задайте NUXT_SESSION_PASSWORD и остальные переменные в .env
+
+docker compose up --build
+```
+
+Приложение будет доступно по адресу [http://localhost:3000](http://localhost:3000) (или на порту из `APP_PORT` в `.env`).
+
+Данные сохраняются в Docker volumes:
+
+- `app-data` — SQLite-база (`.data/app.db`)
+- `app-uploads` — загруженные изображения (`public/uploads`)
+
+В `.env` укажите `NUXT_PUBLIC_SITE_URL` — публичный URL приложения (например, `http://localhost:3000`).
+
+`ADMIN_EMAIL` и `ADMIN_PASSWORD` используются **только при первом сидинге** (когда БД пустая). Если вы их поменяли — сбросьте volumes: `docker compose down -v`.
+
+```bash
+docker compose down       # остановить контейнеры
+docker compose down -v    # остановить и удалить volumes (БД и uploads будут удалены)
+```
 
 #### Переменные окружения
 

@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    ports:
+      - '${APP_PORT:-3000}:3000'
+    env_file:
+      - .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      DATABASE_URL: file:.data/app.db
+      NUXT_ADMIN_EMAIL: ${ADMIN_EMAIL}
+      NUXT_ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      - app-data:/app/.data
+      - app-uploads:/app/public/uploads
+    restart: unless-stopped
+
+volumes:
+  app-data:
+  app-uploads:
